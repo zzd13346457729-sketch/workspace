@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+
+# C/C++
+*.out
+*.exe
+*.o
+
+# Environment
+.venv/
+
+# Dataset
+data/
+datasets/
+
+# Model
+*.pt
+*.pth
+*.ckpt
+
+# Logs
+logs/
+runs/
+
+# Temporary
+*.tmp
+*.log
