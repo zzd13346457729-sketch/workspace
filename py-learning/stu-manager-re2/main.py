@@ -1,5 +1,10 @@
 import json
-DATA="./data/re2.json"
+#DATA="./data/re2.json"
+from pathlib import Path
+
+BASE_DIR=Path(__file__).resolve().parent##
+DATA=BASE_DIR/"data"/"re2.json"##
+
 def get_level(score):
     if score>=90:
         return("A")
@@ -16,21 +21,21 @@ def add_change_student(students):
     name=input("请输入姓名：").strip()
     if not name:
         print("姓名不能为空，请重新进入添加")##
-        return 0##
+        return 0##修改了print和return
     while True:
         try: 
             score=float(input("请输入分数：").strip())
-            if not (0<=score<=100):
+            if not (0<=score<=100):##NaN
                 print("范围错误，请输入零到一百的数字")
                 continue
             break
         except ValueError as e:
             print(f"{e}，请输入数字，请重试")
-            continue##
-    ##if students.get(name):##改为name in students 0分会False
+            continue
+    #if students.get(name):##改为name in students 0分会False
     if name in students:    
         print("该学生存在，是否修改ta的成绩？\n是请输入yes，否请输入no")
-        while True:
+        while True:##添加了循环防止输错
             yn=input().strip().lower()
             if yn=="yes":
                 students[name]=score
@@ -45,11 +50,11 @@ def add_change_student(students):
 
 def find_student(students):
     name=input("请输入要查询的学生姓名：").strip()
-    ##if not students.get(name):
+    #if not students.get(name):
     if name not in students:
         return("未找到该学生")
     else:
-        return(name,students[name])
+        return(f"姓名：{name}  成绩：{students[name]}  等级：{get_level(students[name])}")
 
 def showcase_all(students):
     if not students:
@@ -58,6 +63,7 @@ def showcase_all(students):
     else:
         for name,score in students.items():
             print(f"姓名：{name}，成绩：{score}，等级：{get_level(score)}\n")
+#修改return成为print
 
 def remove_student(students):
     name=input("请输入要删除的学生姓名：").strip()
@@ -69,8 +75,8 @@ def remove_student(students):
             students.pop(name)
 
 def show_statistics(students):
-    if not students:
-        return None,{}
+    if not students:##判断往前放，后面的else删去
+        return None,{}##修改return
     sum=0
     s=0
     level_dic={"A":0,"B":0,"C":0,"D":0,"NP":0}
@@ -92,6 +98,7 @@ def show_menu():
     print("0. 退出程序")
 
 def main():
+    DATA.parent.mkdir(parents=True, exist_ok=True)##
     try:
         with open(DATA, "r", encoding="utf-8") as f:
             students = json.load(f)
