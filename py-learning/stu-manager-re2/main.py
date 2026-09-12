@@ -1,10 +1,5 @@
-import json
-#DATA="./data/re2.json"
-from pathlib import Path
-
-BASE_DIR=Path(__file__).resolve().parent##
-DATA=BASE_DIR/"data"/"re2.json"##
-
+from storage import read_students
+from storage import save_students
 def get_level(score):
     if score>=90:
         return("A")
@@ -98,14 +93,8 @@ def show_menu():
     print("0. 退出程序")
 
 def main():
-    DATA.parent.mkdir(parents=True, exist_ok=True)##
-    try:
-        with open(DATA, "r", encoding="utf-8") as f:
-            students = json.load(f)
-    except FileNotFoundError:
-        students = {}
-    except json.JSONDecodeError:
-        print("数据文件不是有效JSON，请检查文件后重新运行")
+    students=read_students()
+    if students is None:
         return
     while True:
         show_menu()
@@ -135,9 +124,7 @@ def main():
         else:
             print("输入错误，请重试，输入0-5")
             continue
-        with open(DATA,"w",encoding="utf-8")as f:
-            json.dump(students,f,ensure_ascii=False,indent=4)
-
+        save_students(students)
 
 if __name__ == "__main__":
     main()
