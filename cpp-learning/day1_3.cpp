@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 void aver(int count,int total){
     std::cout<<"Records:"<<count<<"\n";
     if(count>0){
@@ -20,11 +21,12 @@ void print_level(int minutes){
 }
 int main() {
     std::cout << "Hello, World!\n";
-    int total_minutes = 0;
+    int total_minutes=0,total_cpp = 0;
     int count =0;
     while(1){
         std::cout << "Enter minutes (0 to finish):\n";
         int minutes = 0;
+
         if (!(std::cin >> minutes)) {
             // 严重的输入流错误：结束程序
             if (std::cin.bad()) {
@@ -51,9 +53,19 @@ int main() {
             std::cout << "Minutes must be greater than 0.\n";
             continue;
         }
+        std::string subject="";
+        std::cout<<"Enter subject\n";
+        if(!(std::cin>>subject)){
+            std::cout << "Input error.\n";
+                return 1;
+        }
+        if(subject=="cpp"){
+            total_cpp+=minutes;
+        }
         total_minutes += minutes;
         count++;
         double hours = to_hour(minutes);
+        std::cout << "Subject: "<< subject << "\n";
         std::cout << "Minutes: " << minutes << "\n";
         std::cout << "Hours: " << hours << "\n";
         print_level(minutes);
@@ -61,5 +73,6 @@ int main() {
     aver(count,total_minutes);
     std::cout << "Total minutes: " << total_minutes << "\n";
     std::cout << "Total hours: " << total_minutes / 60.0 << "\n";
+    std::cout << "Total minutes for cpp: " << total_cpp << "\n";
     return 0;
 }
