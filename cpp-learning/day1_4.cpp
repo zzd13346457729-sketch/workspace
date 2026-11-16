@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include<vector>
 void aver(int count,int total){
     std::cout<<"Records:"<<count<<"\n";
     if(count>0){
@@ -20,9 +21,17 @@ void print_level(int minutes){
         }
 }
 int main() {
-    std::cout << "Hello, World!\n";
+    //std::vector<int> scores;
+    //scores.push_back(70);
+    //scores.push_back(90);
+    //std::cout<<scores.size()<<"\n";
+    //for(int score:scores){
+    //    std::cout<<score<<"\n";
+    //}
+    //std::cout << "Hello, World!\n";
     int total_minutes=0,total_cpp = 0;
     int count =0;
+    std::vector<int> mins;
     while(1){
         std::cout << "Enter minutes (0 to finish):\n";
         int minutes = 0;
@@ -59,6 +68,7 @@ int main() {
             std::cout << "Input error.\n";
                 return 1;
         }
+        mins.push_back(minutes);
         if(subject=="cpp"){
             total_cpp+=minutes;
         }
@@ -74,5 +84,9 @@ int main() {
     std::cout << "Total minutes: " << total_minutes << "\n";
     std::cout << "Total hours: " << total_minutes / 60.0 << "\n";
     std::cout << "Total minutes for cpp: " << total_cpp << "\n";
+    for(int min:mins){
+        std::cout<<min<<" ";
+    }
+    std::cout<<"\nSaved records: " <<mins.size()<<"\n";
     return 0;
 }
