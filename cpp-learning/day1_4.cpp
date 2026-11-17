@@ -28,6 +28,13 @@ int main() {
     //for(int score:scores){
     //    std::cout<<score<<"\n";
     //}
+
+    /*std::vector<int> scores={70,90,80};
+    std::cout<<scores[0]<<scores[1]<<scores[2]<<"\n";
+    if(scores.empty()){
+        std::cout<<"No scores.\n"
+    }*/
+
     //std::cout << "Hello, World!\n";
     int total_minutes=0,total_cpp = 0;
     int count =0;
@@ -35,7 +42,6 @@ int main() {
     while(1){
         std::cout << "Enter minutes (0 to finish):\n";
         int minutes = 0;
-
         if (!(std::cin >> minutes)) {
             // 严重的输入流错误：结束程序
             if (std::cin.bad()) {
@@ -80,7 +86,23 @@ int main() {
         std::cout << "Hours: " << hours << "\n";
         print_level(minutes);
     }
+    int sum=0,max=0;
+    for(int i=0;i<=count-1;i++){
+        sum+=mins[i];
+        if(i==0){
+            max=mins[i];
+        }
+        if(mins[i]>max){
+            max=mins[i];
+        }
+    }
     aver(count,total_minutes);
+    if(mins.empty()){
+        std::cout<<"no records\n";
+    }else{
+        std::cout<<"Total minuts from vector:"<<sum<<"\n";
+        std::cout<<"max minutes:"<<max<<"\n";
+    }
     std::cout << "Total minutes: " << total_minutes << "\n";
     std::cout << "Total hours: " << total_minutes / 60.0 << "\n";
     std::cout << "Total minutes for cpp: " << total_cpp << "\n";
