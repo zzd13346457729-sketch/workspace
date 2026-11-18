@@ -10,6 +10,16 @@ void aver(int count,int total){
     std::cout << "No records.\n";
     }
 }
+int sum_minute(std::vector<int> values){
+    int sum=0;
+    if(values.empty()){
+        return 0;
+    }
+    for(int v:values){
+        sum+=v;
+    }
+    return sum;
+}
 double to_hour(int minutes){
     return minutes / 60.0;
 }
@@ -86,9 +96,8 @@ int main() {
         std::cout << "Hours: " << hours << "\n";
         print_level(minutes);
     }
-    int sum=0,max=0;
+    int sum=sum_minute(mins),max=0;
     for(int i=0;i<=count-1;i++){
-        sum+=mins[i];
         if(i==0){
             max=mins[i];
         }
