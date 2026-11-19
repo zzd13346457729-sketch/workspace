@@ -10,7 +10,7 @@ void aver(int count,int total){
     std::cout << "No records.\n";
     }
 }
-int sum_minute(std::vector<int> values){
+int sum_minute(const std::vector<int>& values){
     int sum=0;
     if(values.empty()){
         return 0;
@@ -19,6 +19,18 @@ int sum_minute(std::vector<int> values){
         sum+=v;
     }
     return sum;
+}
+int max_minutes(int count,const std::vector<int> &values){
+    int max=0;    
+    for(int i=0;i<=count-1;i++){
+        if(i==0){
+            max=values[i];
+        }
+        if(values[i]>max){
+            max=values[i];
+        }
+    }
+    return max;
 }
 double to_hour(int minutes){
     return minutes / 60.0;
@@ -96,15 +108,7 @@ int main() {
         std::cout << "Hours: " << hours << "\n";
         print_level(minutes);
     }
-    int sum=sum_minute(mins),max=0;
-    for(int i=0;i<=count-1;i++){
-        if(i==0){
-            max=mins[i];
-        }
-        if(mins[i]>max){
-            max=mins[i];
-        }
-    }
+    int sum=sum_minute(mins),max=max_minutes(count,mins);
     aver(count,total_minutes);
     if(mins.empty()){
         std::cout<<"no records\n";
