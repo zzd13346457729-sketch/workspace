@@ -5,6 +5,17 @@ struct Record{
     std::string subject;
     int minutes;
 };
+int count_at_least(
+    const std::vector<Record>& records,
+    int threshold
+){  int sum=0;
+    for(const Record& r:records){
+        if (r.minutes>=threshold){
+                sum++;
+        }
+    }
+    return sum;
+}
 int total_for_subject(
     const std::vector<Record>& records,
     const std::string& target
@@ -172,5 +183,7 @@ int main() {
             std::cout<<"no records";
         }
     }
+    std::cout << "Records >= 30 minutes: "
+          << count_at_least(records, 30) << "\n";
     return 0;
 }
