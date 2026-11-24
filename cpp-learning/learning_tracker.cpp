@@ -1,10 +1,30 @@
 #include <iostream>
 #include <string>
 #include<vector>
+#include<fstream>
 struct Record{
     std::string subject;
     int minutes;
 };
+bool save_records(
+    const std::vector<Record>& records,
+    const std::string& filename
+){
+    std::ofstream f(filename);
+    if(!f){
+        std::cout<<"Can not open file\n";
+        return false;
+    }
+    for(const Record& r:records){
+        f<<r.subject<<" "<<r.minutes<<"\n";
+    }
+    f.close();
+    if(!f){
+        std::cout<<"Write failed.\n";
+        return false;
+    }
+    return true;
+}
 int count_at_least(
     const std::vector<Record>& records,
     int threshold
@@ -85,6 +105,19 @@ int main() {
     }*/
 
     //std::cout << "Hello, World!\n";
+
+    /*std::ofstream out("file_demo.txt");
+    if(!out){
+        std::cout<<"Can not open file\n";
+        return 1;
+    }
+    out<<"math 45\n";
+    out.close();
+    if (!out) {
+        std::cout << "Write failed.\n";
+        return 1;
+    }
+    */
     int total_minutes=0,total_cpp = 0;
     int count =0;
     std::vector<Record> records;
@@ -143,6 +176,12 @@ int main() {
     }else{
         std::cout<<"Total minutes from vector:"<<sum<<"\n";
         std::cout<<"max minutes:"<<max<<"\n";
+    }
+    bool saved=save_records(records,"build/records_export.txt");
+    if(saved){
+        std::cout<<"successfully send records to file";
+    }else{
+        std::cout<<"failed to send records to file";
     }
     std::cout << "Total minutes: " << total_minutes << "\n";
     std::cout << "Total hours: " << total_minutes / 60.0 << "\n";
