@@ -57,13 +57,13 @@ void aver(int count,int total){
     std::cout << "No records.\n";
     }
 }
-int sum_minute(int count,const std::vector<Record>& values){
+int sum_minute(const std::vector<Record>& values){
     int sum=0;
     if(values.empty()){
         return 0;
     }
-    for(int i=0;i<=count-1;i++){
-        sum+=values[i].minutes;
+    for(const Record& r : values){
+        sum+=r.minutes;
     }
     return sum;
 }
@@ -169,7 +169,7 @@ int main() {
         std::cout << "Hours: " << hours << "\n";
         print_level(minutes);
     }
-    int sum=sum_minute(count,records),max=max_minutes(count,records);
+    int sum=sum_minute(records),max=max_minutes(count,records);
     aver(count,total_minutes);
     if(records.empty()){
         std::cout<<"no records\n";
